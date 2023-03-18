@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 return;
         }
 
+        //Rotation matriks adalah aljabar untuk mengkonversi posisi device pada bumi
         float [] rotationMatrix = new float[9];
         boolean rotation0k = SensorManager.getRotationMatrix(rotationMatrix,null,mAccelerometerData, mMagnetometerData);
         float orientationValues [] = new float[3];
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mTextSensorAzimuth.setText(getResources().getString(R.string.value_format, azimuth));
         mTextSensorPitch.setText(getResources().getString(R.string.value_format, pitch));
         mTextSensorRoll.setText(getResources().getString(R.string.value_format, roll));
+
         //merubah warna
         if (Math.abs(pitch) < VALUE_DRIFT){
             pitch = 0;
@@ -108,12 +110,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (Math.abs(roll) < VALUE_DRIFT){
             roll = 0;
         }
+
         mSpotTop.setAlpha(0.0f);
         mSpotBottom.setAlpha(0.0f);
         mSpotRight.setAlpha(0.0f);
         mSpotLeft.setAlpha(0.0f);
 
-        //absolute agar gak ada koma
+        //absolute supaya gak ada koma
         if (pitch > 0){
             mSpotBottom.setAlpha(pitch);
         }
@@ -127,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             mSpotRight.setAlpha(Math.abs(roll));
         }
     }
-    //Rotation matriks adalah aljabar untuk mengkonversi posisi device pada bumi
     //mengenerate azimuth dst
 
     //cari nilai role dan pengertian azimuth, pitch,role
